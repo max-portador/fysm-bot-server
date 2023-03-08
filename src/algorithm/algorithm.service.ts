@@ -85,7 +85,13 @@ export class AlgorithmService {
   }
 
   async getAll() {
-    const list = await this.algModel.find({});
+    const list = await this.algModel.aggregate([
+      {
+        $sort: {
+          name: 1,
+        },
+      },
+    ]);
     if (!list) {
       return new Error('Failure getting algorithms');
     }
