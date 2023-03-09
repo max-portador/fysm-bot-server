@@ -1,45 +1,60 @@
-import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
-import {UserService} from "./user.service";
-import {CreateUserDto, UpdateUserDto} from "./dto/createUser.dto";
-import {Types} from "mongoose";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { UserService } from './user.service';
+import { CreateUserDto, UpdateUserDto } from './dto/createUser.dto';
+import { Types } from 'mongoose';
 
 @Controller('user')
 export class UserController {
-    constructor(private  userService: UserService) {
-    }
+  constructor(private userService: UserService) {}
 
-    @Get('list')
-    getUser(){
-        return this.userService.getUsers()
-    }
+  @Get('list')
+  getUser() {
+    return this.userService.getUsers();
+  }
 
-    @Post('create')
-    createUser(@Body() dto: CreateUserDto){
-        return this.userService.createUser(dto)
-    }
+  @Post('create')
+  createUser(@Body() dto: CreateUserDto) {
+    return this.userService.createUser(dto);
+  }
 
-    @Get('by_id/:id')
-    getUserById(@Param('id') id: Types.ObjectId){
-        return this.userService.getUserById(id)
-    }
+  @Get('by_id/:id')
+  getUserById(@Param('id') id: Types.ObjectId) {
+    return this.userService.getUserById(id);
+  }
 
-    @Put('update')
-    updateUser(@Body() dto: UpdateUserDto){
-        return this.userService.updateUser(dto)
-    }
+  @Get('by_tgId/:id')
+  getUserByTgId(@Param('id') id: number) {
+    return this.userService.getUserByTgId(id);
+  }
 
-    @Put('status/:id')
-    changeUserStatus(@Param('id') id: Types.ObjectId, @Body() body: {status: boolean}){
-        return this.userService.changeStatus(id, body.status)
-    }
+  @Put('update')
+  updateUser(@Body() dto: UpdateUserDto) {
+    return this.userService.updateUser(dto);
+  }
 
-    @Delete('delete/:id')
-    deleteUser(@Param('id') id: Types.ObjectId){
-        return this.userService.deleteUser(id)
-    }
+  @Put('status/:id')
+  changeUserStatus(
+    @Param('id') id: Types.ObjectId,
+    @Body() body: { status: boolean },
+  ) {
+    return this.userService.changeStatus(id, body.status);
+  }
 
-    @Get('status/:id')
-    getStatus(@Param('id') id: string){
-        return this.userService.getStatus(id)
-    }
+  @Delete('delete/:id')
+  deleteUser(@Param('id') id: Types.ObjectId) {
+    return this.userService.deleteUser(id);
+  }
+
+  @Get('status/:id')
+  getStatus(@Param('id') id: string) {
+    return this.userService.getStatus(id);
+  }
 }
