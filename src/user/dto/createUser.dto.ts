@@ -7,6 +7,8 @@ export interface CreateUserDto {
   tgId?: number;
   expirationMonths?: number;
   role: UserRole;
+  equalityMode?: boolean;
+  sendAlgPhoto?: boolean;
 }
 
 export interface UpdateUserDto extends CreateUserDto {

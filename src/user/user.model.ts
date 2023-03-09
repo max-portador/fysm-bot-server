@@ -15,6 +15,8 @@ export const UserSchema = new mongoose.Schema(
     isActive: Boolean,
     expireDate: Number,
     role: { type: String, default: UserRole.NOBODY },
+    equalityMode: { type: Boolean, default: false },
+    sendAlgPhoto: { type: Boolean, default: true },
   },
   { strict: false },
 );
@@ -26,4 +28,6 @@ export interface IUser {
   tgId?: number;
   expireDate: number;
   role: UserRole;
+  equalityMode?: boolean;
+  sendAlgPhoto?: boolean;
 }

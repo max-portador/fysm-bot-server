@@ -74,8 +74,17 @@ export class UserService {
     return user;
   }
 
-  async updateUser(dto: UpdateUserDto) {
-    const { _id, tgUsername, tgId, isActive, expirationMonths, role } = dto;
+  async updateUser(dto: Partial<UpdateUserDto>) {
+    const {
+      _id,
+      tgUsername,
+      tgId,
+      isActive,
+      expirationMonths,
+      role,
+      equalityMode,
+      sendAlgPhoto,
+    } = dto;
     const user = await this.userModel.findOne({ _id }, null, { strict: false });
 
     if (!user) {
@@ -92,6 +101,12 @@ export class UserService {
     if (tgId) user.tgId = tgId;
     user.isActive = isActive;
     user.role = role;
+    if (equalityMode) {
+      user.equalityMode = equalityMode;
+    }
+    if (sendAlgPhoto) {
+      user.sendAlgPhoto = sendAlgPhoto;
+    }
     await user.save();
     return user;
   }
