@@ -109,7 +109,7 @@ export class UserService {
     if (!candidate) {
       return new Error('User not found');
     }
-    return candidate;
+    return candidate.pop();
   }
 
   async getUserById(_id: Types.ObjectId) {
