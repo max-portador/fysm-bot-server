@@ -86,7 +86,6 @@ export class UserService {
       sendAlgPhoto,
     } = dto;
     const user = await this.userModel.findOne({ _id }, null, { strict: false });
-
     if (!user) {
       return new Error('cant find User');
     }
@@ -101,13 +100,17 @@ export class UserService {
     if (tgId) user.tgId = tgId;
     user.isActive = isActive;
     user.role = role;
-    if (equalityMode) {
+    if (equalityMode !== undefined) {
       user.equalityMode = equalityMode;
     }
-    if (sendAlgPhoto) {
+    if (sendAlgPhoto !== undefined) {
       user.sendAlgPhoto = sendAlgPhoto;
     }
+    console.log('109');
+    console.log(JSON.stringify(user));
     await user.save();
+    console.log('112');
+    console.log(JSON.stringify(user));
     return user;
   }
 
